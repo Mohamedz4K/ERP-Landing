@@ -3,20 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ERP Ultimate</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <title>ERP Ultimate - تحميل البرنامج</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #1a1d23;
-      --bg2: #22262e;
+      --bg: #14171c;
+      --bg-surface: #1a1e26;
+      --bg-surface-elevated: #212733;
       --accent: #3a6bff;
-      --accent2: #5580ff;
-      --text: #e8ecf4;
-      --muted: #8a93a8;
-      --card-bg: #1e2229;
-      --border: rgba(255,255,255,0.07);
+      --accent2: #5c85ff;
+      --accent-glow: rgba(58, 107, 255, 0.28);
+      --accent-soft: rgba(58, 107, 255, 0.12);
+      --text: #eef2f8;
+      --muted: #8e99ae;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(58, 107, 255, 0.4);
+      --card-bg: #191d25;
+      --success: #10b981;
     }
 
     body {
@@ -28,18 +33,19 @@
       flex-direction: column;
       align-items: center;
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    /* Radial background glow */
+    /* Ambient background glow */
     body::before {
       content: '';
       position: fixed;
-      top: -20%;
+      top: -150px;
       left: 50%;
       transform: translateX(-50%);
-      width: 900px;
+      width: 1000px;
       height: 700px;
-      background: radial-gradient(ellipse at center, rgba(58,107,255,0.18) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(58,107,255,0.22) 0%, rgba(58,107,255,0.05) 45%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -48,127 +54,316 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 860px;
-      padding: 40px 24px 60px;
+      max-width: 920px;
+      padding: 44px 20px 60px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
 
-    /* Badge */
+    /* Top Badge */
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
       border-radius: 999px;
-      padding: 8px 20px;
+      padding: 8px 22px;
       font-size: 14px;
       color: var(--text);
-      margin-bottom: 44px;
+      margin-bottom: 34px;
       animation: fadeDown 0.6s ease both;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
     .badge .dot {
-      width: 8px; height: 8px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 8px var(--accent);
+      background: #22c55e;
+      box-shadow: 0 0 10px #22c55e;
+      animation: pulseDot 2s infinite ease-in-out;
     }
-    .badge .badge-link {
+    .badge .badge-tag {
+      background: rgba(58, 107, 255, 0.2);
       color: var(--accent2);
-      text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
     }
 
     /* Logo */
     .logo {
-      font-size: clamp(56px, 10vw, 96px);
+      font-size: clamp(52px, 8.5vw, 88px);
       font-weight: 900;
       letter-spacing: -2px;
       line-height: 1;
       margin-bottom: 20px;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.5);
       animation: fadeDown 0.7s ease 0.1s both;
     }
     .logo span.white { color: #ffffff; }
-    .logo span.blue  { color: var(--accent2); }
+    .logo span.blue  {
+      background: linear-gradient(135deg, #4d7cff 0%, #00d2ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
     .divider {
       width: 100%;
+      max-width: 550px;
       height: 2px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      margin-bottom: 36px;
+      margin-bottom: 30px;
+      opacity: 0.7;
       animation: fadeIn 0.8s ease 0.2s both;
     }
 
-    /* Headline */
+    /* Headline & Texts */
     .headline {
-      font-size: clamp(26px, 4.5vw, 38px);
-      font-weight: 700;
-      line-height: 1.4;
-      margin-bottom: 16px;
+      font-size: clamp(26px, 4.2vw, 38px);
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 14px;
       animation: fadeUp 0.7s ease 0.3s both;
     }
 
     .subtext {
-      font-size: 16px;
+      font-size: 17px;
       color: var(--muted);
       line-height: 1.8;
-      max-width: 520px;
-      margin-bottom: 14px;
+      max-width: 540px;
+      margin-bottom: 8px;
       animation: fadeUp 0.7s ease 0.35s both;
     }
 
     .tagline {
       font-size: 16px;
       font-weight: 700;
-      margin-bottom: 36px;
+      color: #b8c4d8;
+      margin-bottom: 34px;
       animation: fadeUp 0.7s ease 0.4s both;
     }
 
-    /* CTA Button */
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--accent);
-      color: #fff;
-      font-family: 'Cairo', sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      padding: 20px 52px;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      margin-bottom: 20px;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 6px 32px rgba(58,107,255,0.35);
-      animation: fadeUp 0.7s ease 0.45s both;
-    }
-    .cta-btn:hover {
-      background: var(--accent2);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px rgba(58,107,255,0.5);
-    }
-    .cta-btn svg {
-      font-size: 22px;
+    /* =======================================
+       DOWNLOAD VERSIONS SECTION
+       ======================================= */
+    .versions-section {
+      width: 100%;
+      margin-bottom: 34px;
+      animation: fadeUp 0.8s ease 0.45s both;
     }
 
-    /* Meta info */
-    .meta {
+    .versions-header {
       display: flex;
       align-items: center;
-      gap: 16px;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
       color: var(--muted);
       font-size: 14px;
-      margin-bottom: 52px;
-      animation: fadeUp 0.7s ease 0.5s both;
+      font-weight: 600;
     }
-    .meta .sep { opacity: 0.4; }
+    .versions-header::before,
+    .versions-header::after {
+      content: '';
+      flex: 1;
+      max-width: 90px;
+      height: 1px;
+      background: var(--border);
+    }
 
-    /* Feature cards */
+    .versions-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 20px;
+      width: 100%;
+      text-align: right;
+    }
+
+    /* Individual Version Card */
+    .version-card {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+
+    .version-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Latest version special styling */
+    .version-card.latest {
+      background: linear-gradient(180deg, #1c2230 0%, #171b24 100%);
+      border: 1px solid var(--border-accent);
+      box-shadow: 0 12px 36px rgba(58, 107, 255, 0.16);
+    }
+
+    .version-card.latest::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #3a6bff, #00d2ff);
+    }
+
+    .version-card.latest:hover {
+      border-color: rgba(92, 133, 255, 0.7);
+      box-shadow: 0 18px 48px rgba(58, 107, 255, 0.28);
+    }
+
+    /* Card Top Row */
+    .version-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .version-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .version-badge.latest {
+      background: rgba(58, 107, 255, 0.18);
+      color: #6ea0ff;
+      border: 1px solid rgba(58, 107, 255, 0.35);
+    }
+
+    .version-badge.previous {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .version-tag {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* Card Info */
+    .version-title-wrap {
+      margin-bottom: 14px;
+    }
+
+    .version-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .version-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      min-height: 44px;
+    }
+
+    /* Version Meta Info */
+    .version-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+      padding: 12px 0;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+      margin-bottom: 20px;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+
+    /* Action Buttons */
+    .btn-download-latest {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #3a6bff 0%, #2952cc 100%);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 20px rgba(58, 107, 255, 0.35);
+    }
+
+    .btn-download-latest:hover {
+      background: linear-gradient(135deg, #4d7cff 0%, #3a6bff 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(58, 107, 255, 0.5);
+    }
+
+    .btn-download-prev {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      text-decoration: none;
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-download-prev:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Feature Cards */
     .cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -178,11 +373,12 @@
       overflow: hidden;
       border: 1px solid var(--border);
       animation: fadeUp 0.8s ease 0.55s both;
+      background: var(--card-bg);
+      margin-top: 10px;
     }
 
     .card {
-      background: var(--card-bg);
-      padding: 28px 20px;
+      padding: 26px 18px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -191,7 +387,7 @@
       transition: background 0.2s;
     }
     .card:last-child { border-left: none; }
-    .card:hover { background: #252a33; }
+    .card:hover { background: rgba(255, 255, 255, 0.03); }
 
     .card-icon {
       font-size: 32px;
@@ -204,7 +400,7 @@
       color: var(--text);
     }
     .card-desc {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
       line-height: 1.5;
     }
@@ -213,13 +409,14 @@
     .trial-note {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 13.5px;
       margin-top: 28px;
       animation: fadeUp 0.8s ease 0.6s both;
     }
-    .trial-note svg { opacity: 0.5; }
+    .trial-note svg { opacity: 0.6; color: var(--accent2); }
 
     /* Animations */
     @keyframes fadeDown {
@@ -235,21 +432,35 @@
       to   { opacity: 1; }
     }
 
-    @media (max-width: 600px) {
-      .cards { grid-template-columns: repeat(2, 1fr); }
-      .card { border-left: none; border-top: 1px solid var(--border); }
-      .card:nth-child(odd) { border-right: 1px solid var(--border); }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .versions-grid {
+        grid-template-columns: 1fr;
+      }
+      .version-desc {
+        min-height: auto;
+      }
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .card {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+      .card:nth-child(odd) {
+        border-right: 1px solid var(--border);
+      }
     }
   </style>
 </head>
 <body>
   <div class="wrapper">
 
-    <!-- Badge -->
+    <!-- Top Badge -->
     <div class="badge">
       <span class="dot"></span>
-      الإصدار v2.1.0 — صدر
-      <a href="#" class="badge-link">للتو</a>
+      <span>الإصدار v2.1.1</span>
+      <span class="badge-tag">النسخة الأحدث جاهزة</span>
     </div>
 
     <!-- Logo -->
@@ -263,27 +474,91 @@
     <h1 class="headline">خلاص بقى نظام واحد بيعمل كل حاجة</h1>
 
     <p class="subtext">
-      تابع المبيعات، الفواتير والمخازن من شاشة واحدة.
+      تابع المبيعات، الفواتير والمخازن من شاشة واحدة بدقة وسرعة متناهية.
     </p>
 
     <p class="tagline">ثبّته وابدأ اشتغل على طول — بدون تعقيدات.</p>
 
-    <!-- CTA -->
-  <a href="https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP.Setup.2.1.1.exe" class="cta-btn">
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 3v13m0 0l-4-4m4 4l4-4"/>
-      </svg>
-      حمّل دلوقتي — مجاناً
-    </a>
+    <!-- DOWNLOAD SECTION: DUAL VERSIONS -->
+    <section class="versions-section">
+      <div class="versions-header">
+        <span>اختر النسخة المناسبة لجهازك</span>
+      </div>
 
-    <!-- Meta -->
-    <div class="meta">
-      <span>Windows 10 / 11</span>
-      <span class="sep">•</span>
-      <span>64-bit</span>
-      <span class="sep">•</span>
-      <span>~167 MB</span>
-    </div>
+      <div class="versions-grid">
+        
+        <!-- CARD 1: LATEST VERSION (النسخة الأخيرة) -->
+        <div class="version-card latest">
+          <div>
+            <div class="version-top">
+              <span class="version-badge latest">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                النسخة الأخيرة (موصى بها)
+              </span>
+              <span class="version-tag">الإصدار v2.1.1</span>
+            </div>
+
+            <div class="version-title-wrap">
+              <h2 class="version-name">النسخة الأخيرة</h2>
+              <p class="version-desc">أحدث إصدار يتضمن كافة التحديثات الأمنية، سرعة الاستجابة، ودعم الأوفلاين وقواعد البيانات المحسنة.</p>
+            </div>
+
+            <div class="version-meta">
+              <span class="meta-pill">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                Windows 10 / 11
+              </span>
+              <span class="meta-pill">64-bit</span>
+              <span class="meta-pill">~165 MB</span>
+            </div>
+          </div>
+
+          <!-- رابط تحميل النسخة الأخيرة -->
+          <a href="https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP.Setup.2.1.1.exe" class="btn-download-latest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 3v13m0 0l-4-4m4 4l4-4"/>
+            </svg>
+            تحميل النسخة الأخيرة (v2.1.1)
+          </a>
+        </div>
+
+        <!-- CARD 2: PREVIOUS VERSION (النسخة السابقة) -->
+        <div class="version-card previous">
+          <div>
+            <div class="version-top">
+              <span class="version-badge previous">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+                النسخة السابقة
+              </span>
+              <span class="version-tag">الإصدار v1.0.0</span>
+            </div>
+
+            <div class="version-title-wrap">
+              <h2 class="version-name">النسخة السابقة</h2>
+              <p class="version-desc">الإصدار المستقر السابق، مخصص للأجهزة أو الأنظمة التي تحتاج توافقاً مع الإصدارات السابقة.</p>
+            </div>
+
+            <div class="version-meta">
+              <span class="meta-pill">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                Windows 10 / 11
+              </span>
+              <span class="meta-pill">64-bit</span>
+              <span class="meta-pill">~122 MB</span>
+            </div>
+          </div>
+
+          <!-- رابط تحميل النسخة السابقة -->
+          <a href="https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP.Setup.1.0.0.exe" class="btn-download-prev">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 3v13m0 0l-4-4m4 4l4-4"/>
+            </svg>
+            تحميل النسخة السابقة (v1.0.0)
+          </a>
+        </div>
+
+      </div>
+    </section>
 
     <!-- Feature Cards -->
     <div class="cards">
@@ -295,26 +570,26 @@
       <div class="card">
         <div class="card-icon">🗄️</div>
         <div class="card-title">قاعدة بيانات</div>
-        <div class="card-desc"> محلي و سحابي</div>
+        <div class="card-desc">محلي وسحابي</div>
       </div>
       <div class="card">
         <div class="card-icon">🔒</div>
-        <div class="card-title">ترخيص</div>
+        <div class="card-title">ترخيص آمن</div>
         <div class="card-desc">مرتبط بجهازك</div>
       </div>
       <div class="card">
         <div class="card-icon">⚡</div>
-        <div class="card-title">تثبيت</div>
+        <div class="card-title">تثبيت سريع</div>
         <div class="card-desc">دقيقتين وهيشتغل</div>
       </div>
     </div>
 
     <!-- Trial note -->
     <div class="trial-note">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
       </svg>
-      نسخة مجانية للتجربة — بدون بيانات بنكية
+      نسخة مجانية للتجربة — بدون بيانات بنكية أو اشتراكات مخفية
     </div>
 
   </div>
