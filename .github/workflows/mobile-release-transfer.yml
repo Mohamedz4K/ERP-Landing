@@ -1,0 +1,27 @@
+name: Verify and mirror mobile release
+on:
+  push:
+    branches: [codex/mobile-release-transfer]
+    paths: [.github/workflows/mobile-release-transfer.yml]
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Download and verify the existing Expo APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 'https://expo.dev/artifacts/eas/sYgpdKumuCX5E264EJqAuW92HmDxu7NcnJ66WRkyyZs.apk' --output UltimateERP-Mobile-1.0.20-build26.apk
+          echo 'ed8747761e9418fa5629d8540af1e42932a7452044c04e47a46f98f0f361f736  UltimateERP-Mobile-1.0.20-build26.apk' | sha256sum --check --strict
+          test "$(stat --format=%s UltimateERP-Mobile-1.0.20-build26.apk)" = 142612398
+      - name: Mirror the verified APK into the prepared draft release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/Mohamedz4K/ERP-Landing/releases/436074350 --jq '[.draft,.tag_name] | @tsv' | grep -Fx $'true\tdesktop-4.0.0-mobile-1.0.20-b26'
+          gh release upload desktop-4.0.0-mobile-1.0.20-b26 UltimateERP-Mobile-1.0.20-build26.apk --repo Mohamedz4K/ERP-Landing
