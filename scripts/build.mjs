@@ -26,7 +26,7 @@ for (const key of ["desktop", "mobile"]) {
   const url = new URL(release.url);
   if (
     url.origin !== "https://github.com" ||
-    !url.pathname.startsWith("/Mohamedz4K/ERP-Landing/releases/download/") ||
+    !url.pathname.startsWith("/Mohamedz4K/Ultimate-ERP-Download/releases/download/") ||
     decodeURIComponent(url.pathname.split("/").at(-1)) !== release.filename
   )
     throw Error(`Unexpected ${key} download URL`);
