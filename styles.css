@@ -1144,9 +1144,14 @@ summary {
   nav a {
     font-size: 12px;
   }
+  nav > a:first-child {
+    display: none;
+  }
   .nav-download {
     padding: 6px 11px;
     gap: 7px;
+    min-height: 44px;
+    white-space: nowrap;
   }
   .nav-download svg {
     width: 15px;
