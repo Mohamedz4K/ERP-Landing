@@ -1,0 +1,23 @@
+{
+  "updatedAt": "2026-11-06",
+  "releaseUrl": "https://github.com/Mohamedz4K/ERP-Landing/releases/tag/desktop-4.0.0-mobile-1.0.20-b26",
+  "desktop": {
+    "version": "4.0.0",
+    "filename": "UltimateERP-Desktop-4.0.0-20261105.exe",
+    "bytes": 175683271,
+    "sha256": "43a6382f5c9c87b8cc6c00def7c9cd0b8b8b0c9102c26e0a0e99b7d827a0be8b",
+    "url": "https://github.com/Mohamedz4K/ERP-Landing/releases/download/desktop-4.0.0-mobile-1.0.20-b26/UltimateERP-Desktop-4.0.0-20261105.exe"
+  },
+  "mobile": {
+    "version": "1.0.20",
+    "build": 26,
+    "filename": "UltimateERP-Mobile-1.0.20-build26.apk",
+    "bytes": 142612398,
+    "sha256": "ed8747761e9418fa5629d8540af1e42932a7452044c04e47a46f98f0f361f736",
+    "url": "https://github.com/Mohamedz4K/ERP-Landing/releases/download/desktop-4.0.0-mobile-1.0.20-b26/UltimateERP-Mobile-1.0.20-build26.apk"
+  },
+  "archive": {
+    "version": "2.1.8",
+    "url": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP.Setup.2.1.8.exe"
+  }
+}

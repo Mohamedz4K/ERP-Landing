@@ -1,597 +1,484 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ERP Ultimate - تحميل البرنامج</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #14171c;
-      --bg-surface: #1a1e26;
-      --bg-surface-elevated: #212733;
-      --accent: #3a6bff;
-      --accent2: #5c85ff;
-      --accent-glow: rgba(58, 107, 255, 0.28);
-      --accent-soft: rgba(58, 107, 255, 0.12);
-      --text: #eef2f8;
-      --muted: #8e99ae;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-accent: rgba(58, 107, 255, 0.4);
-      --card-bg: #191d25;
-      --success: #10b981;
-    }
-
-    body {
-      font-family: 'Cairo', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    /* Ambient background glow */
-    body::before {
-      content: '';
-      position: fixed;
-      top: -150px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1000px;
-      height: 700px;
-      background: radial-gradient(ellipse at center, rgba(58,107,255,0.22) 0%, rgba(58,107,255,0.05) 45%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .wrapper {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 920px;
-      padding: 44px 20px 60px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    /* Top Badge */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(8px);
-      border-radius: 999px;
-      padding: 8px 22px;
-      font-size: 14px;
-      color: var(--text);
-      margin-bottom: 34px;
-      animation: fadeDown 0.6s ease both;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-    .badge .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 10px #22c55e;
-      animation: pulseDot 2s infinite ease-in-out;
-    }
-    .badge .badge-tag {
-      background: rgba(58, 107, 255, 0.2);
-      color: var(--accent2);
-      font-weight: 700;
-      font-size: 12px;
-      padding: 2px 8px;
-      border-radius: 6px;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.85); }
-    }
-
-    /* Logo */
-    .logo {
-      font-size: clamp(52px, 8.5vw, 88px);
-      font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1;
-      margin-bottom: 20px;
-      text-shadow: 0 4px 24px rgba(0,0,0,0.5);
-      animation: fadeDown 0.7s ease 0.1s both;
-    }
-    .logo span.white { color: #ffffff; }
-    .logo span.blue  {
-      background: linear-gradient(135deg, #4d7cff 0%, #00d2ff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .divider {
-      width: 100%;
-      max-width: 550px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      margin-bottom: 30px;
-      opacity: 0.7;
-      animation: fadeIn 0.8s ease 0.2s both;
-    }
-
-    /* Headline & Texts */
-    .headline {
-      font-size: clamp(26px, 4.2vw, 38px);
-      font-weight: 800;
-      line-height: 1.35;
-      margin-bottom: 14px;
-      animation: fadeUp 0.7s ease 0.3s both;
-    }
-
-    .subtext {
-      font-size: 17px;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 540px;
-      margin-bottom: 8px;
-      animation: fadeUp 0.7s ease 0.35s both;
-    }
-
-    .tagline {
-      font-size: 16px;
-      font-weight: 700;
-      color: #b8c4d8;
-      margin-bottom: 34px;
-      animation: fadeUp 0.7s ease 0.4s both;
-    }
-
-    /* =======================================
-       DOWNLOAD VERSIONS SECTION
-       ======================================= */
-    .versions-section {
-      width: 100%;
-      margin-bottom: 34px;
-      animation: fadeUp 0.8s ease 0.45s both;
-    }
-
-    .versions-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 600;
-    }
-    .versions-header::before,
-    .versions-header::after {
-      content: '';
-      flex: 1;
-      max-width: 90px;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .versions-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 20px;
-      width: 100%;
-      text-align: right;
-    }
-
-    /* Individual Version Card */
-    .version-card {
-      position: relative;
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 26px 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border: 1px solid var(--border);
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-      overflow: hidden;
-    }
-
-    .version-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    /* Latest version special styling */
-    .version-card.latest {
-      background: linear-gradient(180deg, #1c2230 0%, #171b24 100%);
-      border: 1px solid var(--border-accent);
-      box-shadow: 0 12px 36px rgba(58, 107, 255, 0.16);
-    }
-
-    .version-card.latest::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #3a6bff, #00d2ff);
-    }
-
-    .version-card.latest:hover {
-      border-color: rgba(92, 133, 255, 0.7);
-      box-shadow: 0 18px 48px rgba(58, 107, 255, 0.28);
-    }
-
-    /* Card Top Row */
-    .version-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-
-    .version-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 999px;
-    }
-
-    .version-badge.latest {
-      background: rgba(58, 107, 255, 0.18);
-      color: #6ea0ff;
-      border: 1px solid rgba(58, 107, 255, 0.35);
-    }
-
-    .version-badge.previous {
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--muted);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .version-tag {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    /* Card Info */
-    .version-title-wrap {
-      margin-bottom: 14px;
-    }
-
-    .version-name {
-      font-size: 22px;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-
-    .version-desc {
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height: 1.6;
-      min-height: 44px;
-    }
-
-    /* Version Meta Info */
-    .version-meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      font-size: 12.5px;
-      color: var(--muted);
-      padding: 12px 0;
-      border-top: 1px dashed rgba(255, 255, 255, 0.08);
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
-      margin-bottom: 20px;
-    }
-
-    .meta-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 3px 9px;
-      border-radius: 6px;
-    }
-
-    /* Action Buttons */
-    .btn-download-latest {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #3a6bff 0%, #2952cc 100%);
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Cairo', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 14px 20px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 6px 20px rgba(58, 107, 255, 0.35);
-    }
-
-    .btn-download-latest:hover {
-      background: linear-gradient(135deg, #4d7cff 0%, #3a6bff 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(58, 107, 255, 0.5);
-    }
-
-    .btn-download-prev {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.06);
-      color: #e2e8f0;
-      text-decoration: none;
-      font-family: 'Cairo', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 14px 20px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-download-prev:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.25);
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    /* Feature Cards */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      animation: fadeUp 0.8s ease 0.55s both;
-      background: var(--card-bg);
-      margin-top: 10px;
-    }
-
-    .card {
-      padding: 26px 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      border-left: 1px solid var(--border);
-      transition: background 0.2s;
-    }
-    .card:last-child { border-left: none; }
-    .card:hover { background: rgba(255, 255, 255, 0.03); }
-
-    .card-icon {
-      font-size: 32px;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .card-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .card-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    /* Trial note */
-    .trial-note {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 13.5px;
-      margin-top: 28px;
-      animation: fadeUp 0.8s ease 0.6s both;
-    }
-    .trial-note svg { opacity: 0.6; color: var(--accent2); }
-
-    /* Animations */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .versions-grid {
-        grid-template-columns: 1fr;
-      }
-      .version-desc {
-        min-height: auto;
-      }
-      .cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .card {
-        border-left: none;
-        border-top: 1px solid var(--border);
-      }
-      .card:nth-child(odd) {
-        border-right: 1px solid var(--border);
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="wrapper">
-
-    <!-- Top Badge -->
-    <div class="badge">
-      <span class="dot"></span>
-      <span>الإصدار v3.0.16</span>
-      <span class="badge-tag">النسخة الأحدث جاهزة</span>
-    </div>
-
-    <!-- Logo -->
-    <div class="logo">
-      <span class="white">ERP</span><span class="blue">ULTIMATE</span>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Headline -->
-    <h1 class="headline">خلاص بقى نظام واحد بيعمل كل حاجة</h1>
-
-    <p class="subtext">
-      تابع المبيعات، الفواتير والمخازن من شاشة واحدة بدقة وسرعة متناهية.
-    </p>
-
-    <p class="tagline">ثبّته وابدأ اشتغل على طول — بدون تعقيدات.</p>
-
-    <!-- DOWNLOAD SECTION: DUAL VERSIONS -->
-    <section class="versions-section">
-      <div class="versions-header">
-        <span>اختر النسخة المناسبة لجهازك</span>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10141f" />
+    <title>UltimateERP | تحميل برنامج المكتب وتطبيق المندوبين</title>
+    <meta
+      name="description"
+      content="حمّل UltimateERP للمكتب وتطبيق المندوبين لأندرويد. إدارة المبيعات والمخازن والحسابات، مع الزيارات والبيع والتحصيل الميداني ومتابعة المزامنة."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="UltimateERP — مكتبك ومندوبيك في منظومة واحدة"
+    />
+    <meta
+      property="og:description"
+      content="برنامج Windows للإدارة، وتطبيق Android للمندوبين. حمّل النسخ وتعرف على خطوات الربط والتحديث."
+    />
+    <meta property="og:url" content="https://erp-landing-nine.vercel.app/" />
+    <link rel="canonical" href="https://erp-landing-nine.vercel.app/" />
+    <link
+      rel="preload"
+      href="assets/fonts/cairo-arabic-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <script src="site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">انتقل للمحتوى</a>
+    <header class="site-header">
+      <div class="container nav-row">
+        <a class="brand" href="#" aria-label="UltimateERP — الرئيسية"
+          ><svg class="brand-icon" aria-hidden="true">
+            <use href="assets/icons.svg#brand" /></svg
+          ><span dir="ltr"
+            >ULTIMATE<span class="brand-accent">ERP</span></span
+          ></a
+        >
+        <nav aria-label="التنقل الرئيسي">
+          <a href="#how-it-works">طريقة التشغيل</a
+          ><a class="nav-download" href="#downloads"
+            >تحميل البرامج
+            <svg aria-hidden="true">
+              <use href="assets/icons.svg#download" /></svg
+          ></a>
+        </nav>
       </div>
+    </header>
 
-      <div class="versions-grid">
-        
-        <!-- CARD 1: LATEST VERSION (النسخة الأخيرة) -->
-        <div class="version-card latest">
-          <div>
-            <div class="version-top">
-              <span class="version-badge latest">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                النسخة الأخيرة (موصى بها)
-              </span>
-              <span class="version-tag">الإصدار v4.0.0</span>
-            </div>
-
-            <div class="version-title-wrap">
-              <h2 class="version-name">النسخة الأخيرة</h2>
-              <p class="version-desc">أحدث إصدار يتضمن كافة التحديثات الأمنية، سرعة الاستجابة، ودعم الأوفلاين وقواعد البيانات المحسنة.</p>
-            </div>
-
-            <div class="version-meta">
-              <span class="meta-pill">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-                Windows 10 / 11
-              </span>
-              <span class="meta-pill">64-bit</span>
-              <span class="meta-pill">~165 MB</span>
-            </div>
+    <main id="main" class="container">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="status-dot" aria-hidden="true"></span> برنامج المكتب +
+            تطبيق المندوبين
+          </p>
+          <h1 id="hero-title">
+            إدارة من المكتب.<br /><span
+              >وشغل المندوب<br class="desktop-break" />
+              من الموبايل.</span
+            >
+          </h1>
+          <p class="hero-description">
+            المبيعات والمخازن والحسابات على الكمبيوتر. والزيارات والبيع والتحصيل
+            مع المندوب في الميدان. كل واحد له دوره، والمزامنة بتربط الشغل بينهم.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#downloads"
+              >اختار نسختك وحمّلها
+              <svg aria-hidden="true">
+                <use href="assets/icons.svg#arrow" /></svg></a
+            ><a class="text-link" href="#how-it-works">إزاي بيشتغلوا مع بعض؟</a>
           </div>
-
-          <!-- رابط تحميل النسخة الأخيرة -->
-          <a href="https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP.Setup.4.0.0.exe" class="btn-download-latest">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 3v13m0 0l-4-4m4 4l4-4"/>
-            </svg>
-            تحميل النسخة الأخيرة (v4.0.0)
-          </a>
+          <div class="hero-tags">
+            <span
+              ><svg aria-hidden="true">
+                <use href="assets/icons.svg#desktop" />
+              </svg>
+              Windows للمكتب</span
+            ><span
+              ><svg aria-hidden="true">
+                <use href="assets/icons.svg#phone" />
+              </svg>
+              Android للمندوب</span
+            >
+          </div>
         </div>
 
-        <!-- CARD 2: PREVIOUS VERSION (النسخة السابقة) -->
-        <div class="version-card previous">
-          <div>
-            <div class="version-top">
-              <span class="version-badge previous">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
-                النسخة السابقة
-              </span>
-              <span class="version-tag">الإصدار v2.1.8</span>
+        <figure class="system-visual">
+          <div class="visual-glow" aria-hidden="true"></div>
+          <div class="visual-stage" aria-hidden="true">
+            <div class="monitor">
+              <div class="window-top">
+                <span class="window-brand" dir="ltr">ULTIMATEERP</span>
+                <div class="window-dots"><i></i><i></i><i></i></div>
+              </div>
+              <div class="monitor-body">
+                <aside class="visual-sidebar">
+                  <span class="sidebar-selected"></span><span></span
+                  ><span></span><span></span>
+                </aside>
+                <div class="visual-dashboard">
+                  <div class="visual-welcome">شغلك، قدامك بوضوح.</div>
+                  <div class="visual-kpis">
+                    <div>
+                      <svg><use href="assets/icons.svg#warehouse" /></svg
+                      ><span>المخازن</span>
+                    </div>
+                    <div>
+                      <svg><use href="assets/icons.svg#desktop" /></svg
+                      ><span>الحسابات</span>
+                    </div>
+                    <div>
+                      <svg><use href="assets/icons.svg#phone" /></svg
+                      ><span>المندوبين</span>
+                    </div>
+                  </div>
+                  <div class="visual-table">
+                    <div><span>مخزن المندوب</span><b>مستقل</b></div>
+                    <div><span>إغلاق اليومية</span><b>للمراجعة</b></div>
+                    <div><span>وصول الحركات</span><b>متابعة</b></div>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div class="version-title-wrap">
-              <h2 class="version-name">النسخة السابقة</h2>
-              <p class="version-desc">الإصدار المستقر السابق، مخصص للأجهزة أو الأنظمة التي تحتاج توافقاً مع الإصدارات السابقة.</p>
+            <div class="monitor-foot"></div>
+            <div class="connection-chip">
+              <svg><use href="assets/icons.svg#sync" /></svg> نفس المنظومة.
+              أدوار مختلفة.
             </div>
-
-            <div class="version-meta">
-              <span class="meta-pill">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-                Windows 10 / 11
-              </span>
-              <span class="meta-pill">64-bit</span>
-              <span class="meta-pill">~122 MB</span>
+            <div class="phone">
+              <div class="phone-camera"></div>
+              <div class="phone-head">
+                <svg><use href="assets/icons.svg#phone" /></svg
+                ><span>تطبيق المندوب</span>
+              </div>
+              <div class="phone-content">
+                <span class="phone-label">من الميدان</span
+                ><strong>فاتورة جديدة</strong>
+                <div class="phone-line"></div>
+                <div class="phone-line short"></div>
+                <div class="phone-saved">
+                  <svg><use href="assets/icons.svg#check" /></svg> محفوظة على
+                  الهاتف
+                </div>
+                <div class="phone-sync">
+                  <svg><use href="assets/icons.svg#sync" /></svg
+                  ><span>بانتظار تأكيد<br />الكمبيوتر</span>
+                </div>
+              </div>
+              <div class="phone-home"></div>
             </div>
           </div>
+          <figcaption>تصوّر توضيحي لربط المكتب بالميدان</figcaption>
+        </figure>
+      </section>
 
-          <!-- رابط تحميل النسخة السابقة -->
-          <a href="https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP.Setup.3.0.17.exe" class="btn-download-prev">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 3v13m0 0l-4-4m4 4l4-4"/>
-            </svg>
-            تحميل النسخة السابقة (v2.1.8)
-          </a>
+      <section
+        id="downloads"
+        class="section downloads"
+        aria-labelledby="downloads-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">التحميل</p>
+            <h2 id="downloads-title">نسختك، حسب دورك.</h2>
+          </div>
+          <p class="section-aside">
+            آخر تحديث لمركز التحميل<br /><time datetime="2026-11-06"
+              >٦ نوفمبر ٢٠٢٦</time
+            >
+          </p>
         </div>
+        <p class="section-intro">
+          حمّل برنامج المكتب للإدارة، وتطبيق المندوبين للميدان. تشغيل الموبايل
+          يحتاج حساب مندوب وربطًا من مسؤول الشركة.
+        </p>
+        <div class="download-grid">
+          <article
+            class="download-card desktop-card"
+            aria-labelledby="desktop-title"
+          >
+            <div class="product-heading">
+              <span class="product-icon"
+                ><svg aria-hidden="true">
+                  <use href="assets/icons.svg#desktop" /></svg></span
+              ><span class="platform-tag">لإدارة الشركة</span>
+            </div>
+            <p class="product-label" dir="ltr">ULTIMATEERP DESKTOP</p>
+            <h3 id="desktop-title">برنامج المكتب</h3>
+            <p class="product-description">
+              مكان الإدارة والمراجعة. تابع الفواتير والمخازن والحسابات، وراجع
+              شغل المندوبين من الكمبيوتر.
+            </p>
+            <ul class="feature-list">
+              <li>
+                <svg aria-hidden="true">
+                  <use href="assets/icons.svg#check" />
+                </svg>
+                مخزون منفصل لكل مخزن وسيارة
+              </li>
+              <li>
+                <svg aria-hidden="true">
+                  <use href="assets/icons.svg#check" />
+                </svg>
+                المبيعات والحسابات والخزينة
+              </li>
+              <li>
+                <svg aria-hidden="true">
+                  <use href="assets/icons.svg#check" />
+                </svg>
+                مراجعة واعتماد يوميات المندوبين
+              </li>
+            </ul>
+            <div class="release-info">
+              <strong>الإصدار <bdi>4.0.0</bdi></strong
+              ><span>Windows 10 / 11 · 64-bit</span
+              ><span><bdi>EXE · 175.7 MB</bdi></span>
+            </div>
+            <a
+              class="button primary download-button"
+              id="desktop-download"
+              href="https://github.com/Mohamedz4K/ERP-Landing/releases/download/desktop-4.0.0-mobile-1.0.20-b26/UltimateERP-Desktop-4.0.0-20261105.exe"
+              ><svg aria-hidden="true">
+                <use href="assets/icons.svg#download" />
+              </svg>
+              تحميل برنامج المكتب <span dir="ltr">.exe</span></a
+            >
+            <details class="file-check">
+              <summary>التحقق من سلامة الملف <span>اختياري</span></summary>
+              <p>بصمة الملف <bdi>SHA-256</bdi> للمقارنة بعد التحميل:</p>
+              <code dir="ltr">43a6382f5c9c87b8cc6c00def7c9cd0b8b8b0c9102c26e0a0e99b7d827a0be8b</code
+              ><button
+                class="copy-button"
+                type="button"
+                data-copy="43a6382f5c9c87b8cc6c00def7c9cd0b8b8b0c9102c26e0a0e99b7d827a0be8b"
+                aria-label="نسخ بصمة ملف برنامج المكتب"
+              >
+                <svg aria-hidden="true">
+                  <use href="assets/icons.svg#copy" />
+                </svg>
+                نسخ البصمة
+              </button>
+            </details>
+          </article>
+          <article
+            class="download-card mobile-card"
+            aria-labelledby="mobile-title"
+          >
+            <div class="product-heading">
+              <span class="product-icon"
+                ><svg aria-hidden="true">
+                  <use href="assets/icons.svg#phone" /></svg></span
+              ><span class="platform-tag">للمندوب في الميدان</span>
+            </div>
+            <p class="product-label" dir="ltr">ULTIMATEERP MOBILE</p>
+            <h3 id="mobile-title">تطبيق المندوبين</h3>
+            <p class="product-description">
+              عميلك ومخزن سيارتك معاك. سجّل الزيارة والبيع والتحصيل، وتابع حالة
+              وصول شغلك للمكتب.
+            </p>
+            <ul class="feature-list">
+              <li>
+                <svg aria-hidden="true">
+                  <use href="assets/icons.svg#check" />
+                </svg>
+                الزيارات والبيع والتحصيل
+              </li>
+              <li>
+                <svg aria-hidden="true">
+                  <use href="assets/icons.svg#check" />
+                </svg>
+                حفظ العمليات وقت ضعف الاتصال
+              </li>
+              <li>
+                <svg aria-hidden="true">
+                  <use href="assets/icons.svg#check" />
+                </svg>
+                تنبيه اليومية ومطابقة النقدية المعدودة
+              </li>
+            </ul>
+            <div class="release-info">
+              <strong
+                >الإصدار <bdi>1.0.20</bdi>
+                <span class="build-tag">بناء 26</span></strong
+              ><span>Android · يحتاج الربط بالمكتب</span
+              ><span><bdi>APK · 142.6 MB</bdi></span>
+            </div>
+            <a
+              class="button mint download-button"
+              id="mobile-download"
+              href="https://github.com/Mohamedz4K/ERP-Landing/releases/download/desktop-4.0.0-mobile-1.0.20-b26/UltimateERP-Mobile-1.0.20-build26.apk"
+              ><svg aria-hidden="true">
+                <use href="assets/icons.svg#download" />
+              </svg>
+              تحميل تطبيق المندوبين <span dir="ltr">.apk</span></a
+            >
+            <details class="file-check">
+              <summary>التحقق من سلامة الملف <span>اختياري</span></summary>
+              <p>بصمة الملف <bdi>SHA-256</bdi> للمقارنة بعد التحميل:</p>
+              <code dir="ltr">ed8747761e9418fa5629d8540af1e42932a7452044c04e47a46f98f0f361f736</code
+              ><button
+                class="copy-button"
+                type="button"
+                data-copy="ed8747761e9418fa5629d8540af1e42932a7452044c04e47a46f98f0f361f736"
+                aria-label="نسخ بصمة ملف تطبيق المندوبين"
+              >
+                <svg aria-hidden="true">
+                  <use href="assets/icons.svg#copy" />
+                </svg>
+                نسخ البصمة
+              </button>
+            </details>
+          </article>
+        </div>
+        <div class="release-note">
+          <svg aria-hidden="true"><use href="assets/icons.svg#shield" /></svg>
+          <p>
+            <strong>إصدار للتجهيز والتجربة قبل التعميم.</strong> خُد نسخة
+            احتياطية من المكتب، وحدّث تطبيق الهاتف فوق النسخة الموجودة من غير
+            حذف بياناته.
+            <a href="https://github.com/Mohamedz4K/ERP-Landing/releases/tag/desktop-4.0.0-mobile-1.0.20-b26" target="_blank" rel="noopener noreferrer"
+              >تفاصيل الإصدار
+              <svg aria-hidden="true">
+                <use href="assets/icons.svg#external" /></svg
+            ></a>
+          </p>
+        </div>
+      </section>
 
-      </div>
-    </section>
+      <section id="how-it-works" class="section" aria-labelledby="how-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">من المكتب للميدان</p>
+            <h2 id="how-title">تجهيز بسيط. ومسار واضح للشغل.</h2>
+          </div>
+        </div>
+        <ol class="steps">
+          <li>
+            <span class="step-number" aria-hidden="true">01</span>
+            <h3>جهّز الشركة على المكتب</h3>
+            <p>
+              عرّف المندوب وعملاءه ومخزن سيارته، وجهّز بيانات أو رمز الربط الخاص
+              به.
+            </p>
+          </li>
+          <li>
+            <span class="step-number" aria-hidden="true">02</span>
+            <h3>اربط الموبايل بالمندوب</h3>
+            <p>
+              ثبّت التطبيق واربطه بالحساب اللي جهّزه مسؤول الشركة، ثم اعمل
+              المزامنة الأولى للبيانات.
+            </p>
+          </li>
+          <li>
+            <span class="step-number" aria-hidden="true">03</span>
+            <h3>تابع اليوم وراجع الإغلاق</h3>
+            <p>
+              المندوب يسجّل شغله ويعدّ النقدية ويغلق اليومية. المحاسب يراجع
+              الوصول والاستلام ويعتمد التوريد من المكتب.
+            </p>
+          </li>
+        </ol>
+        <div class="sync-explainer">
+          <div>
+            <span class="sync-icon"
+              ><svg aria-hidden="true"><use href="assets/icons.svg#sync" /></svg
+            ></span>
+            <h3>النت ضعيف؟ تابع المرحلة اللي وصل لها شغلك.</h3>
+            <p>
+              العمليات المحفوظة تفضل على الهاتف عند انقطاع الاتصال. بعد رجوعه،
+              تابع الرفع وتأكيد الكمبيوتر؛ وجود الإنترنت وحده مش تأكيدًا إن
+              الفاتورة اتطبّقت.
+            </p>
+          </div>
+          <ol class="sync-stages" aria-label="مراحل وصول الحركة">
+            <li>
+              <span class="stage-dot"></span><strong>محفوظ على الهاتف</strong
+              ><small>لسه محتاج يترفع</small>
+            </li>
+            <li>
+              <span class="stage-dot"></span><strong>مرفوع للسحابة</strong
+              ><small>بانتظار تطبيق المكتب</small>
+            </li>
+            <li>
+              <span class="stage-dot"></span><strong>مؤكد من الكمبيوتر</strong
+              ><small>وصل واتطبّق على النظام</small>
+            </li>
+          </ol>
+        </div>
+      </section>
 
-    <!-- Feature Cards -->
-    <div class="cards">
-      <div class="card">
-        <div class="card-icon">📦</div>
-        <div class="card-title">Standalone</div>
-        <div class="card-desc">بدون انترنت</div>
-      </div>
-      <div class="card">
-        <div class="card-icon">🗄️</div>
-        <div class="card-title">قاعدة بيانات</div>
-        <div class="card-desc">محلي وسحابي</div>
-      </div>
-      <div class="card">
-        <div class="card-icon">🔒</div>
-        <div class="card-title">ترخيص آمن</div>
-        <div class="card-desc">مرتبط بجهازك</div>
-      </div>
-      <div class="card">
-        <div class="card-icon">⚡</div>
-        <div class="card-title">تثبيت سريع</div>
-        <div class="card-desc">دقيقتين وهيشتغل</div>
-      </div>
-    </div>
+      <section id="help" class="section faq" aria-labelledby="faq-title">
+        <div>
+          <p class="eyebrow">قبل ما تبدأ</p>
+          <h2 id="faq-title">أسئلة في مكانها.</h2>
+          <p class="section-intro">
+            علشان تختار النسخة المناسبة وتحدّثها من غير ما تضيّع شغلك.
+          </p>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>هل تطبيق الموبايل بديل لبرنامج المكتب؟</summary>
+            <p>
+              الموبايل مخصص لشغل المندوب: الزيارات والبيع والتحصيل ومتابعة مخزن
+              السيارة. المكتب هو مكان إدارة الشركة والمحاسبة ومراجعة يوميات
+              المندوبين.
+            </p>
+          </details>
+          <details>
+            <summary>هل أقدر أشتغل من غير إنترنت؟</summary>
+            <p>
+              برنامج المكتب بيحتفظ ببياناته المحلية. وتطبيق المندوب يحتاج الربط
+              والمزامنة الأولى، وبعدها يحفظ العمليات المتاحة محليًا وقت
+              الانقطاع. رفعها وتأكيد تطبيقها على المكتب يحتاجان رجوع الاتصال
+              وتشغيل المكتب المتصل بالمزامنة.
+            </p>
+          </details>
+          <details>
+            <summary>إزاي أحدث وأحافظ على بياناتي؟</summary>
+            <p>
+              خُد نسخة احتياطية متسقة من المكتب قبل التحديث. ثبّت تحديث الموبايل
+              فوق التطبيق الحالي، من غير حذفه أو مسح بياناته. لو الهاتف رفض
+              التحديث، احتفظ بالتطبيق والعمليات المعلّقة وراجع مسؤول الشركة بدل
+              الحذف وإعادة الربط.
+            </p>
+          </details>
+          <details>
+            <summary>إغلاق اليومية من الموبايل بينقل الفلوس للخزينة؟</summary>
+            <p>
+              إرسال الإغلاق مش إقرارًا باستلام الكاش. المندوب يدخل المبلغ
+              المعدود صراحة، والمحاسب يراجع اليومية والنقدية المستلمة فعليًا
+              ويعتمد التوريد من المكتب. التطبيق يطلب إغلاق اليومية قبل استمرار
+              العمل بعد مرور 24 ساعة، مع بقاء المزامنة متاحة.
+            </p>
+          </details>
+          <details class="archive">
+            <summary>محتاج نسخة مكتب أقدم؟</summary>
+            <p>
+              الأرشيف المتاح هو الإصدار <bdi>2.1.8</bdi>. لا ترجع
+              بقاعدة بيانات حديثة إلى برنامج أقدم بدون مراجعة التوافق والنسخة
+              الاحتياطية.
+            </p>
+            <a class="archive-link" href="https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP.Setup.2.1.8.exe"
+              >تحميل أرشيف المكتب <bdi>2.1.8</bdi
+              ><svg aria-hidden="true">
+                <use href="assets/icons.svg#download" /></svg
+            ></a>
+          </details>
+        </div>
+      </section>
+    </main>
 
-    <!-- Trial note -->
-    <div class="trial-note">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-      </svg>
-      نسخة مجانية للتجربة — بدون بيانات بنكية أو اشتراكات مخفية
-    </div>
-
-  </div>
-</body>
+    <footer class="site-footer container">
+      <a class="brand" href="#" aria-label="العودة لأعلى الصفحة"
+        ><svg class="brand-icon" aria-hidden="true">
+          <use href="assets/icons.svg#brand" /></svg
+        ><span dir="ltr">ULTIMATE<span class="brand-accent">ERP</span></span></a
+      >
+      <p>المكتب للإدارة. والموبايل للميدان.</p>
+      <a
+        href="https://github.com/Mohamedz4K/ERP-Landing"
+        target="_blank"
+        rel="noopener noreferrer"
+        >المشروع على GitHub
+        <svg aria-hidden="true">
+          <use href="assets/icons.svg#external" /></svg></a
+      ><small>© 2026 UltimateERP</small>
+    </footer>
+    <p
+      class="copy-feedback"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      id="copy-feedback"
+    ></p>
+  </body>
 </html>
