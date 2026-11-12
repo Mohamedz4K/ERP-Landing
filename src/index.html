@@ -319,6 +319,53 @@
             </details>
           </article>
         </div>
+        <section
+          id="custom-downloads"
+          class="download-card custom-card"
+          aria-labelledby="custom-title"
+        >
+          <div class="custom-download-layout">
+            <div>
+              <div class="product-heading">
+                <span class="product-icon"><svg aria-hidden="true">
+                  <use href="assets/icons.svg#shield" />
+                </svg></span>
+                <span class="platform-tag">حسب توجيه فريق الدعم</span>
+              </div>
+              <p class="product-label" dir="ltr">ULTIMATEERP CUSTOM</p>
+              <h3 id="custom-title">نسخ مخصصة</h3>
+              <p class="product-description">
+                حزم مخصصة لحالات عمل معينة. حمّل هذه النسخة عندما يوجّهك فريق
+                الدعم لاستخدامها، واحتفظ بنسخة احتياطية قبل التحديث.
+              </p>
+            </div>
+            <div>
+              <div class="release-info">
+                <strong>ملف النسخة <bdi>{{custom.version}}</bdi></strong>
+                <span>Windows 10 / 11 · 64-bit</span>
+                <span><bdi>EXE · {{custom.size}}</bdi></span>
+              </div>
+              <a
+                class="button primary download-button"
+                id="custom-download"
+                href="{{custom.url}}"
+              ><svg aria-hidden="true"><use href="assets/icons.svg#download" /></svg>
+                تحميل النسخة المخصصة <span dir="ltr">.exe</span></a>
+              <details class="file-check">
+                <summary>التحقق من سلامة الملف <span>اختياري</span></summary>
+                <p>بصمة الملف <bdi>SHA-256</bdi> للمقارنة بعد التحميل:</p>
+                <code dir="ltr">{{custom.sha256}}</code>
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="{{custom.sha256}}"
+                  aria-label="نسخ بصمة ملف النسخة المخصصة"
+                ><svg aria-hidden="true"><use href="assets/icons.svg#copy" /></svg>
+                  نسخ البصمة</button>
+              </details>
+            </div>
+          </div>
+        </section>
         <div class="release-note">
           <svg aria-hidden="true"><use href="assets/icons.svg#shield" /></svg>
           <p>

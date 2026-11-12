@@ -617,6 +617,33 @@ h2 {
   border-color: #34574e;
   background: linear-gradient(150deg, #1a2d2e, #141c26);
 }
+.custom-card {
+  margin-top: 24px;
+  border-color: #6b5a3e;
+  background: linear-gradient(150deg, #2b2730, #181d29);
+}
+.custom-download-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 340px);
+  gap: 32px;
+  align-items: end;
+}
+.custom-download-layout > div {
+  min-width: 0;
+}
+.custom-card .product-description {
+  min-height: 0;
+}
+.custom-card .product-icon,
+.custom-card .platform-tag,
+.custom-card .product-label {
+  color: #f0d29a;
+}
+.custom-card .product-icon,
+.custom-card .platform-tag {
+  border-color: #f0d29a44;
+  background: #f0d29a0c;
+}
 .product-heading {
   display: flex;
   justify-content: space-between;
@@ -1245,6 +1272,10 @@ summary {
   .download-grid {
     grid-template-columns: 1fr;
     gap: 19px;
+  }
+  .custom-download-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
   .download-card {
     padding: 25px;
