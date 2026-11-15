@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
   "releaseUrl": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/tag/v2.0.0",
   "desktop": {
     "version": "4.0.0",
@@ -10,11 +10,11 @@
   },
   "mobile": {
     "version": "1.0.20",
-    "build": 27,
-    "filename": "UltimateERP-Mobile-1.0.20-build27.apk",
-    "bytes": 142636314,
-    "sha256": "2452c32dc56ba4ed8ea93348313be8c49c1a6337f97ddec3a2aa9b1c62b41098",
-    "url": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP-Mobile-1.0.20-build27.apk"
+    "build": 29,
+    "filename": "UltimateERP-Mobile-1.0.20-build29.apk",
+    "bytes": 142633362,
+    "sha256": "d3814946d6c464007dfc5f8a8d4ab67f7d9eaff2b33e80b4c6d660cd7b9ea7f8",
+    "url": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP-Mobile-1.0.20-build29.apk"
   },
   "custom": {
     "version": "4.0.1",
