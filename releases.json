@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-11-16",
+  "updatedAt": "2026-11-21",
   "releaseUrl": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/tag/v2.0.0",
   "desktop": {
     "version": "4.0.0",
     "filename": "UltimateERP.Setup.4.0.0.exe",
-    "bytes": 175971826,
-    "sha256": "e21e4c06197f5f80c86b833bd25e370f0217775cf7e479e069f6300fd4973c4b",
+    "bytes": 179069400,
+    "sha256": "435c49f7697ce04bc43980ae05ea37db8fdfb1f6dbb9e3d4483d92ff0821028d",
     "url": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP.Setup.4.0.0.exe"
   },
   "mobile": {
