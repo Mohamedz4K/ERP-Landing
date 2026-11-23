@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-24",
   "releaseUrl": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/tag/v2.0.0",
   "desktop": {
     "version": "4.0.0",
@@ -22,6 +22,13 @@
     "bytes": 176001092,
     "sha256": "5c30d46c5e69e25b927b139b11fce99d2b0c0b57c4dfd380cc03f7dc145d20db",
     "url": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP.Setup.4.0.1.exe"
+  },
+  "restaurant": {
+    "version": "4.0.0",
+    "filename": "Ultimate.Restaurant.Setup.4.0.0.exe",
+    "bytes": 160418081,
+    "sha256": "7fa7067121077e6e89784f15b123f8335b6c2fc2d8ba08a15b00f1cf8f8c0a89",
+    "url": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/Ultimate.Restaurant.Setup.4.0.0.exe"
   },
   "archive": {
     "version": "2.1.8",
