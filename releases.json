@@ -4,17 +4,17 @@
   "desktop": {
     "version": "4.0.0",
     "filename": "UltimateERP.Setup.4.0.0.exe",
-    "bytes": 179069400,
-    "sha256": "435c49f7697ce04bc43980ae05ea37db8fdfb1f6dbb9e3d4483d92ff0821028d",
+    "bytes": 177655312,
+    "sha256": "f5c7f0e3109a648c064638c10fbea6b0134fd16163ba4ca0a6b1f3c3a8bf4428",
     "url": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP.Setup.4.0.0.exe"
   },
   "mobile": {
     "version": "1.0.20",
-    "build": 29,
-    "filename": "UltimateERP-Mobile-1.0.20-build29.apk",
-    "bytes": 142633362,
-    "sha256": "d3814946d6c464007dfc5f8a8d4ab67f7d9eaff2b33e80b4c6d660cd7b9ea7f8",
-    "url": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP-Mobile-1.0.20-build29.apk"
+    "build": 30,
+    "filename": "UltimateERP-Mobile-1.0.20-build30.apk",
+    "bytes": 142636978,
+    "sha256": "a7e9f8d68ea8a9cb06493580af3f51ac37c5d8a6dab2a2b7e255d5dac66ee838",
+    "url": "https://github.com/Mohamedz4K/Ultimate-ERP-Download/releases/download/v2.0.0/UltimateERP-Mobile-1.0.20-build30.apk"
   },
   "custom": {
     "version": "4.0.1",
