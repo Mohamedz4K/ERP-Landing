@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://*.supabase.co; form-action 'none'; base-uri 'none'">
+    <title>دعم المزامنة | UltimateERP</title>
+    <link rel="stylesheet" href="support.css">
+    <script src="cloud-sync.js" defer></script>
+    <script src="support.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <div class="wrap topbar-inner">
+            <div class="brand" dir="ltr"><span class="brand-mark" aria-hidden="true">U</span> UltimateERP</div>
+            <button type="button" class="secondary" id="logout" hidden>إنهاء الجلسة</button>
+        </div>
+    </header>
+    <main class="wrap">
+        <div class="intro">
+            <h1>دعم المزامنة</h1>
+            <p>تتبّع فواتير المندوبين وقارن أصناف الموبايل والمكتب من السحابة.</p>
+        </div>
+
+        <section class="panel sign-in" id="connect" aria-labelledby="login-title">
+            <h2 id="login-title">اتصال بمشروع الشركة</h2>
+            <p class="muted">سجّل بحساب إدارة مخصّص للمشروع. الجلسة تنتهي عند قفل الصفحة.</p>
+            <form id="login">
+                <label for="project">رابط المشروع أو معرّفه</label>
+                <input id="project" name="project" dir="ltr" required spellcheck="false" placeholder="xxxxxxxxxxxxxxxxxxxx.supabase.co" maxlength="60">
+                <label for="key">المفتاح العام <span dir="ltr">Publishable / Anon</span></label>
+                <input id="key" name="key" dir="ltr" required spellcheck="false" autocomplete="off" maxlength="1024">
+                <label for="email">البريد الإلكتروني</label>
+                <input id="email" name="email" type="email" dir="ltr" autocomplete="username" required>
+                <label for="password">كلمة مرور الحساب</label>
+                <input id="password" name="password" type="password" dir="ltr" autocomplete="current-password" required>
+                <p id="login-error" class="feedback" role="alert" hidden></p>
+                <button id="login-button" type="submit">اتصال بمشروع الشركة</button>
+            </form>
+        </section>
+
+        <section id="workspace" hidden aria-labelledby="search-title">
+            <div class="panel search">
+                <h2 id="search-title">سجل المزامنة وفواتير المندوب</h2>
+                <p class="muted" dir="ltr" id="connected-project"></p>
+                <form id="search" class="query">
+                    <div><label for="rep-code">كود المندوب</label><input id="rep-code" name="repCode" dir="ltr" required maxlength="32" spellcheck="false" placeholder="REP-0000"></div>
+                    <div><label for="invoice-code">رقم فاتورة الموبايل <span class="optional">اختياري</span></label><input id="invoice-code" name="invoiceCode" dir="ltr" maxlength="24" spellcheck="false" placeholder="M-INV-000012"></div>
+                    <div><label for="office-number">رقم فاتورة المكتب <span class="optional">اختياري</span></label><input id="office-number" name="officeNumber" dir="ltr" maxlength="32" spellcheck="false" placeholder="386"></div>
+                    <div><label for="filter">الحالة</label><select id="filter" name="filter"><option value="all">كل الحالات</option><option value="blocked">تحتاج مراجعة</option></select></div>
+                    <button id="search-button" type="submit">عرض الحالة</button>
+                </form>
+                <p id="search-error" class="feedback" role="alert" hidden></p>
+            </div>
+
+            <section class="panel results" id="results" aria-labelledby="results-title" hidden>
+                <div class="result-header">
+                    <div><h2 id="results-title">نتيجة التتبّع</h2><p id="result-meta" class="muted"></p></div>
+                    <span class="tag neutral">قراءة فقط</span>
+                </div>
+                <p id="sample-note" class="note" hidden></p>
+                <div id="result-list" class="result-list"></div>
+            </section>
+            <p id="announcer" class="sr-only" role="status"></p>
+        </section>
+    </main>
+</body>
+</html>

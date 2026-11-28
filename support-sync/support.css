@@ -1,0 +1,73 @@
+:root {
+    color-scheme: light;
+    --background: #f4f6f9;
+    --paper: #fff;
+    --ink: #172638;
+    --muted: #526579;
+    --border: #dbe3eb;
+    --blue: #1c4c98;
+    --blue-hover: #153d7c;
+    --focus: #2664ca;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    background: var(--background);
+    color: var(--ink);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+.wrap { width: min(1090px, calc(100% - 36px)); margin-inline: auto; }
+.topbar { background: var(--paper); border-bottom: 1px solid var(--border); }
+.topbar-inner { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 750; }
+.brand-mark { display: grid; place-items: center; background: var(--blue); color: var(--paper); border-radius: 9px; width: 34px; height: 34px; }
+.intro { margin-block: clamp(30px, 7vw, 66px) 24px; }
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.25; }
+h2 { font-size: 1.35rem; line-height: 1.35; }
+h3 { font-size: 1rem; line-height: 1.55; }
+.intro p { margin-block-start: 9px; color: var(--muted); }
+.panel { padding: clamp(18px, 4vw, 32px); border: 1px solid var(--border); border-radius: 16px; background: var(--paper); margin-block-end: 24px; }
+.sign-in { max-width: 530px; }
+.muted { color: var(--muted); margin-block-start: 5px; overflow-wrap: anywhere; }
+.search > .muted { text-align: right; }
+.optional { color: var(--muted); font-size: 0.82rem; font-weight: 400; }
+form { margin-block-start: 20px; }
+label { display: block; font-weight: 650; margin-block-end: 5px; }
+input, select, button { font: inherit; min-height: 46px; border-radius: 8px; }
+input, select { background: var(--paper); color: var(--ink); border: 1px solid #a6b5c6; width: 100%; min-width: 0; padding: 7px 11px; }
+input::placeholder { color: #5f7081; }
+.sign-in input { margin-block-end: 14px; }
+button { color: var(--paper); background: var(--blue); border: 1px solid var(--blue); padding: 7px 18px; font-weight: 700; cursor: pointer; }
+button:hover { background: var(--blue-hover); }
+button:disabled { opacity: .64; cursor: wait; }
+button.secondary { background: var(--paper); color: var(--blue); border-color: #a6b5c6; }
+button.secondary:hover { background: #edf3fc; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.query { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(130px, .72fr) auto; gap: 13px; align-items: end; }
+.feedback { color: #a11a2b; margin-block: 10px; overflow-wrap: anywhere; }
+.result-header, .row-heading { display: flex; justify-content: space-between; align-items: start; gap: 10px; flex-wrap: wrap; }
+.result-list { display: grid; margin-block-start: 16px; }
+.result-row { padding-block: 15px; border-top: 1px solid var(--border); }
+.result-row dl { margin: 9px 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.result-row dt { font-size: .85rem; color: var(--muted); }
+.result-row dd { margin: 0; overflow-wrap: anywhere; }
+.items { margin-block-start: 14px; padding: 8px 12px; border-radius: 8px; background: #f8fafc; border: 1px solid var(--border); }
+.items summary { min-height: 44px; cursor: pointer; padding-block: 8px; font-weight: 700; }
+.items ul { list-style: none; padding: 0; margin: 0; }
+.items li { border-top: 1px solid var(--border); padding: 10px 0 2px; overflow-wrap: anywhere; }
+.tag { font-size: .82rem; font-weight: 700; padding: 3px 9px; border-radius: 6px; }
+.neutral { background: #ebf1fa; color: #1c4c98; }
+.good { background: #e7f6ef; color: #185a3e; }
+.wait { background: #fff0d8; color: #754913; }
+.bad { background: #fce9ec; color: #a11a2b; }
+.note { padding: 10px 12px; margin-block-start: 14px; background: #f1f5fb; color: #29486a; border-radius: 8px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 840px) { .query, .result-row dl { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 500px) {
+    .query, .result-row dl { grid-template-columns: 1fr; }
+    .sign-in button { width: 100%; }
+}

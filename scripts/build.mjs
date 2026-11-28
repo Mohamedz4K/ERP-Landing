@@ -52,7 +52,7 @@ const dist = path.join(root, "dist");
 await fs.mkdir(dist, { recursive: true });
 await fs.writeFile(path.join(root, "index.html"), html);
 await fs.writeFile(path.join(dist, "index.html"), html);
-for (const name of ["styles.css", "site.js", "assets"])
+for (const name of ["styles.css", "site.js", "assets", "support-sync"])
   await fs.cp(path.join(root, name), path.join(dist, name), {
     recursive: true,
   });
