@@ -14,7 +14,7 @@ const escape = (value) =>
         c
       ],
   );
-for (const key of ["desktop", "mobile", "restaurant", "custom"]) {
+for (const key of ["desktop", "mobile", "restaurant", "custom", "mobileLegacy"]) {
   const release = releases[key];
   if (
     !/^\d+\.\d+\.\d+$/.test(release.version) ||

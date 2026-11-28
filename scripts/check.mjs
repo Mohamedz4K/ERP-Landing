@@ -11,9 +11,9 @@ const releases = JSON.parse(
 assert.match(html, /<html lang="ar" dir="rtl">/);
 assert.equal((html.match(/<h1\b/g) || []).length, 1);
 assert(!html.includes("{{"), "Unresolved release metadata");
-for (const platform of ["desktop", "mobile", "restaurant", "custom"]) {
+for (const platform of ["desktop", "mobile", "restaurant", "custom", "mobileLegacy"]) {
   const release = releases[platform];
-  const anchor = html.match(new RegExp(`<a\\b[^>]*id="${platform}-download"[^>]*>`))?.[0];
+  const anchor = html.match(new RegExp(`<a\\b[^>]*id="${platform === "mobileLegacy" ? "mobile-legacy" : platform}-download"[^>]*>`))?.[0];
   assert(anchor?.includes(`href="${release.url}"`), `${platform} download URL drift`);
   assert(html.includes(release.sha256), `${platform} checksum drift`);
   assert(html.includes(release.version), `${platform} version missing`);
